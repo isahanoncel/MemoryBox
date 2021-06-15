@@ -5,6 +5,9 @@ import {MdDelete, MdModeEdit} from 'react-icons/md'
 
 import {Card} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
+
+import {deleteMemory} from '../Axios/index.js'
+
 const Memory = ({ memory }) => {
   return (
     <Card className='rounded py-3 my-3'>
@@ -15,14 +18,14 @@ const Memory = ({ memory }) => {
           {memory.content}
         </Card.Text>
         <Card.Title>Author : {memory.creator}</Card.Title>
-        <Card.Subtitle>{moment(memory.createdAt).fromNow()}</Card.Subtitle>
+        <Card.Subtitle>{moment(memory.createdAt).fromNow() }</Card.Subtitle>
       </Card.Body>
 
       <Card.Footer className="bg-white pb-0 d-flex justify-content-between">
-        <LinkContainer  to='/' style={{cursor:'pointer'}}>
+        <LinkContainer  to={`/update/${memory._id}`} style={{cursor:'pointer'}}>
             <MdModeEdit color='blue' size={25}/>
         </LinkContainer>
-            <MdDelete color='red' style={{cursor:'pointer'}} size={25}/>
+            <MdDelete color='red' style={{cursor:'pointer'}} size={25} onClick={() => deleteMemory(memory._id)}/>
       </Card.Footer>
 
     </Card>

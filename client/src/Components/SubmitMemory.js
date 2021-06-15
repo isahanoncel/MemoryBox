@@ -1,4 +1,7 @@
 import React,{useState} from "react";
+
+import {useHistory} from 'react-router-dom'
+
 import ReactFireBase64 from "react-file-base64";
 import { Form, Button } from "react-bootstrap";
 
@@ -13,10 +16,16 @@ const SubmitMemory = () => {
         image:''
     })
 
+    const history = useHistory()
+
   return (
     <Form onSubmit={(e) => {
         e.preventDefault()
-        memoryData.title && memoryData.content && api.createMemory(memoryData)
+        if(memoryData.title && memoryData.content && memoryData.creator){
+          api.createMemory(memoryData)
+          history.push('/')
+        }
+        
     }}>
       <Form.Group>
         <h1>Create a memory</h1>
