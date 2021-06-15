@@ -6,9 +6,14 @@ import {MdDelete, MdModeEdit} from 'react-icons/md'
 import {Card} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 
-import {deleteMemory} from '../Axios/index.js'
+
+import {useDispatch} from 'react-redux'
+import {deleteMemory} from '../Actions/memoryActions'
 
 const Memory = ({ memory }) => {
+
+  const dispatch = useDispatch()
+
   return (
     <Card className='rounded py-3 my-3'>
       <Card.Img variant="top" src={memory.image} />
@@ -25,7 +30,7 @@ const Memory = ({ memory }) => {
         <LinkContainer  to={`/update/${memory._id}`} style={{cursor:'pointer'}}>
             <MdModeEdit color='blue' size={25}/>
         </LinkContainer>
-            <MdDelete color='red' style={{cursor:'pointer'}} size={25} onClick={() => deleteMemory(memory._id)}/>
+            <MdDelete color='red' style={{cursor:'pointer'}} size={25} onClick={() => dispatch(deleteMemory(memory._id))}/>
       </Card.Footer>
 
     </Card>

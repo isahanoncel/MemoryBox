@@ -2,10 +2,11 @@ import React,{useState} from "react";
 
 import {useHistory} from 'react-router-dom'
 
+import {useDispatch} from 'react-redux'
+import {createMemory} from '../Actions/memoryActions'
+
 import ReactFireBase64 from "react-file-base64";
 import { Form, Button } from "react-bootstrap";
-
-import * as api from '../Axios/index.js'
 
 const SubmitMemory = () => {
 
@@ -17,12 +18,13 @@ const SubmitMemory = () => {
     })
 
     const history = useHistory()
+    const dispatch = useDispatch()
 
   return (
     <Form onSubmit={(e) => {
         e.preventDefault()
         if(memoryData.title && memoryData.content && memoryData.creator){
-          api.createMemory(memoryData)
+          dispatch(createMemory(memoryData))
           history.push('/')
         }
         
